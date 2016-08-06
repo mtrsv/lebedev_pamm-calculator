@@ -1,3 +1,275 @@
-body {
-  background-color: blue;
+@import 'reset.scss';
+
+// ILIA MATROSOV
+// 2016
+
+$font-size--pamm-calculator: 14px;
+$color--pamm-calculator: rgb(255, 255, 255);
+$font-type: 'Open Sans', 'Tahoma', sans-serif;
+
+$width--pamm-calculator: 610px;
+
+@mixin m-gradient-background(){
+  // Permalink - use to edit and share this gradient:
+  // http://colorzilla.com/gradient-editor/#001e4e+0,0068b6+50,001e4e+100
+  background: #001e4e; /* Old browsers */
+  background: -moz-linear-gradient(top,  #001e4e 0%, #0068b6 50%, #001e4e 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #001e4e 0%,#0068b6 50%,#001e4e 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #001e4e 0%,#0068b6 50%,#001e4e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e4e', endColorstr='#001e4e',GradientType=0 ); /* IE6-9 */
+  background-repeat: no-repeat;
 }
+
+@mixin m-gradient-background--slider() {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3f5a65+0,a5b2c2+100 */
+  background: #3f5a65; /* Old browsers */
+  background: -moz-linear-gradient(top, #3f5a65 0%, #a5b2c2 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #3f5a65 0%, #a5b2c2 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #3f5a65 0%, #a5b2c2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f5a65', endColorstr='#a5b2c2', GradientType=0); /* IE6-9 */
+}
+
+@mixin m-gradient-background--slider-thumb() {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2e90f2+0,15599b+100 */
+  background: #2e90f2; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #2e90f2 0%, #15599b 100%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, #2e90f2 0%, #15599b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #2e90f2 0%, #15599b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e90f2', endColorstr='#15599b', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+}
+
+@mixin m-gradient-background--slider-progress(){
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffcf0d+8,ffefae+18,ffefae+41,ffcf0d+51,ff9f00+96 */
+  background: #ffcf0d; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffcf0d 8%, #ffefae 18%, #ffefae 41%, #ffcf0d 51%, #ff9f00 96%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ffcf0d 8%,#ffefae 18%,#ffefae 41%,#ffcf0d 51%,#ff9f00 96%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ffcf0d 8%,#ffefae 18%,#ffefae 41%,#ffcf0d 51%,#ff9f00 96%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcf0d', endColorstr='#ff9f00',GradientType=0 ); /* IE6-9 */
+}
+@mixin m-gradient-background--slider-bubble(){
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,c9c9c9+100 */
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #c9c9c9 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#c9c9c9 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ffffff 0%,#c9c9c9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c9c9c9',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin m-borderRadius($radius){
+  -webkit-border-radius: $radius;
+      -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+
+html{
+  height: 100%;
+  @include m-gradient-background;
+}
+
+body{
+  font-family: $font-type;
+  padding-top: 135px;
+  background-image: url("images/background.png");
+  background-repeat: repeat-x;
+  background-position: bottom;
+
+}
+
+#calculator{
+  margin: auto;
+  width: $width--pamm-calculator;
+
+}
+
+.page-title{
+  font-size: 24px;
+  color: rgb(153, 202, 61);
+  font-weight: 100;
+  margin-bottom: 28px;
+  padding-left: 5px;
+}
+
+// ----- pamm-calculator -----
+
+.pamm-calculator{
+  width: $width--pamm-calculator;
+  color: $color--pamm-calculator;
+  margin: auto;
+  border: 1px solid rgb(1, 133, 232);
+  background-color: rgba(0, 32, 62, .45);
+  @include m-borderRadius(10px);
+  padding: 26px 34px 10px 26px;
+  box-sizing: border-box;
+  position:relative;
+
+}
+.pamm-calculator:before
+{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  -webkit-box-shadow:0 20px 20px rgba(0,0,0,0.3);
+     -moz-box-shadow:0 20px 20px rgba(0,0,0,0.3);
+          box-shadow:0 20px 20px rgba(0,0,0,0.3);
+  top:50px;
+  bottom:0;
+  left:20px;
+  right:20px;
+  @include m-borderRadius(25%);
+  clip: rect(170px, 600px, 350px, 10px);
+}
+
+
+
+.p-calc__names-table{
+  width: 185px;
+  float: left;
+}
+
+.p-calc__names-table::after{
+  content: '';
+  background-image: url("images/arrow.png");
+  background-repeat: no-repeat;
+  background-position: 0px -14px;
+  margin-left: 150px;
+  position: relative;
+  top: -180px;
+  width: 60px;
+  height: 300px;
+  //height: 300px;
+  display: inline-block;
+}
+
+.p-calc__slider-box{
+  margin-left: 203px;
+
+}
+
+// ----- names table -----
+
+.names-table__head {
+  font-size: 10px;
+  font-style: italic;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.names-table__row{
+  font-size: 14px;
+  display: inline-block;
+  padding: 6px 10px 4px;
+  margin: 0 0 3px -10px;
+}
+
+.names-table__row:hover{
+  border-radius: 4px;
+  background-color: rgb(102, 204, 255);
+  color: rgb(0, 0, 0);
+}
+
+.names-table__row:hover .names-table__number {
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.names-table__left-column{
+  width: 70px;
+  display: inline-block;
+}
+
+.names-table__number{
+  border-bottom: 1px dashed rgb(255, 255, 255);
+  display: inline-block;
+}
+
+
+// ----- end names table -----
+
+// ----- slider -----
+.slider-box__slider{
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.slider__bubble{
+  padding: 5px 9px;
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  @include m-gradient-background--slider-bubble();
+  position: relative;
+  margin-bottom: 11px;
+  left:100px;
+}
+
+.slider__bubble::after{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 5px 0 5px;
+  border-color: #c9c9c9 transparent transparent transparent;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+}
+
+.slider__body{
+  width: 340px;
+  height: 6px;
+  border: 1px solid rgb(146, 182, 206);
+  @include m-borderRadius(3px);
+  @include m-gradient-background--slider();
+  position: relative;
+
+}
+
+.slider__progress{
+  height: 6px;
+  position: relative;
+  bottom: 6px;
+  @include m-borderRadius(3px);
+  width: 150px;
+  border: none;
+  @include m-gradient-background--slider-progress;
+}
+
+.slider__thumb{
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgb(255, 255, 255);
+  @include m-borderRadius(50%);
+  @include m-gradient-background--slider-thumb();
+  position: absolute;
+  bottom: 2px;
+  left: 145px;
+}
+// ----- end slider -----
+
+.slider-box__deposit-result{
+  //
+  overflow: auto;
+}
+
+.deposit-result__text{
+  width: 150px;
+  float: left;
+  font-size: 12px;
+  font-style: italic;
+  margin-bottom: 32px;
+  color: rgb(102, 204, 255);
+  clear: left;
+}
+
+.deposit-result__value{
+  font-size: 32px;
+  font-weight: bold;
+  //text-align: right;
+  float: right;
+
+}
+
+// ----- end pamm-calculator -----

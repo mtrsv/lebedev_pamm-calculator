@@ -70,7 +70,7 @@ html {
 body {
   font-family: "Open Sans", "Tahoma", sans-serif;
   padding-top: 135px;
-  background-image: url("images/background.png");
+  background-image: url("../images/background.png");
   background-repeat: repeat-x;
   background-position: bottom; }
 
@@ -120,7 +120,7 @@ body {
 
 .p-calc__names-table::after {
   content: '';
-  background-image: url("images/arrow.png");
+  background-image: url("../images/arrow.png");
   background-repeat: no-repeat;
   background-position: 0px -14px;
   margin-left: 150px;

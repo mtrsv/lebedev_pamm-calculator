@@ -49,7 +49,7 @@
         }
 
         function requestData(){
-            $ajaxUtils.sendGetRequest("lebedev_pamm-calculator/data.json",onDataLoaded.bind(this));
+            $ajaxUtils.sendGetRequest("/data.json",onDataLoaded.bind(this));
         }
 
         function onDataLoaded(responseObject){

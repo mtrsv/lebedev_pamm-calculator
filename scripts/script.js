@@ -101,7 +101,13 @@
             coef = (sliderElem.offsetWidth - thumbElem.offsetWidth)/(max - min),
             newLeft,
             isDrag = false,
-            throttledDispatch = throttle(dispatchEvent,100); //dispatch not often than 100ms
+            throttledDispatch; //dispatch not often than 100ms
+
+        if (options.throttle) {
+            throttledDispatch = throttle(dispatchEvent,options.throttle);
+        } else {
+            throttledDispatch = dispatchEvent;
+        }
 
         setValue(currentPosition);
 

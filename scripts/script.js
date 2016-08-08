@@ -34,7 +34,7 @@
             loadingDiv.style.width = elem.offsetWidth + "px";
             loadingDiv.style.lineHeight = elem.offsetHeight + "px";
             loadingDiv.innerHTML = "<img src='../images/loading.gif'>";
-            
+
             elem.parentNode.insertBefore(loadingDiv, elem);
             elem.parentNode.querySelector(".pamm-calculator-loading").style.opacity = 1;
         }
@@ -51,14 +51,22 @@
         function requestData(){
             $ajaxUtils.sendGetRequest("/data.json",onDataLoaded.bind(this));
         }
-        
-                
+
         function onDataLoaded(responseObject){
+            if (responseObject.isError) {
+                onError();
+                return;
+            }
             calculator.managers = responseObject.managers;
             createManagersList.call(calculator);
             setCurrentManager.call(calculator, 0);
             hideLoaderAnimation();
             showContainer();
+        }
+
+        function onError(){
+            var loader = elem.parentNode.querySelector(".pamm-calculator-loading");
+            loader.innerHTML = "Не удалось получить данные "
         }
 
         function setCurrentManager(index){

@@ -99,25 +99,26 @@
             max = options.max || 100,
             currentPosition = options.currentPosition || 0,
             coef = (sliderElem.offsetWidth - thumbElem.offsetWidth)/max,
-            newLeft;
+            newLeft,
+            isDrag = false;
 
         setValue(currentPosition);
 //        dispatchEvent('slide');
 
-        sliderElem.addEventListener("mousedown",onSliderMouseDown);
-        thumbElem.addEventListener("mousedown",onThumbMouseDown);
+        sliderElem.addEventListener("mousedown",onMouseDown);
+        progressElem.addEventListener("mousedown",onMouseDown);
+        thumbElem.addEventListener("mousedown",onMouseDown);
+        document.addEventListener("mousemove",onMouseMove);
+        document.addEventListener("mouseup",onMouseUP);
 
-        function onSliderMouseDown(e) {
-            onThumbMouseDown(e);
-        }
-
-        function onThumbMouseDown(e) {
+        function onMouseDown(e) {
+            startDrag();
             onMouseMove(e);
-            document.addEventListener("mousemove",onMouseMove);
-            document.addEventListener("mouseup",onMouseUP);
         };
 
         function onMouseMove(e) {
+            if (!isDrag) return;
+
             var sliderCoords = getCoords(sliderElem);
 
             newLeft = e.pageX - sliderCoords.left - thumbElem.offsetWidth/2;
@@ -137,6 +138,14 @@
             //console.log("dispatchEvent('slide');")
         }
 
+        function startDrag(){
+            isDrag = true;
+        }
+
+        function stopDrag(){
+            isDrag = false;
+        }
+
         function updatePosition(){
             thumbElem.style.left = newLeft + 'px';
             if (progressElem) progressElem.style.width = newLeft + thumbElem.offsetWidth/2 + 'px';
@@ -144,10 +153,10 @@
         }
 
         function onMouseUP(e){
-            document.removeEventListener("mousemove",onMouseMove);
-            document.removeEventListener("mouseup",onMouseUP);
+            if (!isDrag) return;
+
+            stopDrag();
             dispatchEvent('change');
-            return false;
         }
 
         thumbElem.addEventListener("dragstart",function(e){
@@ -216,7 +225,7 @@
 
             CustomEvent.prototype = Object.create(window.Event.prototype);
         }
-        
+
         //closest
         //ILIA KANTOR (learn.javascript.ru/task/polyfill-matches)
         if (!Element.prototype.matches) {
@@ -251,15 +260,15 @@
 
     var calculatorElement = document.querySelector("#pamm-calculator-first"),
 
-        calculator = new PammCalculator({
-            calculatorElement: calculatorElement,
-            sliderElement: calculatorElement.querySelector(".slider__body"),
-            thumbElement: calculatorElement.querySelector(".slider__thumb"),
-            progressElement: calculatorElement.querySelector(".slider__progress"),
-            bubbleElement: calculatorElement.querySelector(".slider__bubble"),
-            dayProfitElem: calculatorElement.querySelector("#day-profit"),
-            yearProfitElem: calculatorElement.querySelector("#year-profit")
-        });
+    calculator = new PammCalculator({
+        calculatorElement: calculatorElement,
+        sliderElement: calculatorElement.querySelector(".slider__body"),
+        thumbElement: calculatorElement.querySelector(".slider__thumb"),
+        progressElement: calculatorElement.querySelector(".slider__progress"),
+        bubbleElement: calculatorElement.querySelector(".slider__bubble"),
+        dayProfitElem: calculatorElement.querySelector("#day-profit"),
+        yearProfitElem: calculatorElement.querySelector("#year-profit")
+    });
 
 
 })(window);

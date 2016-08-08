@@ -1,0 +1,25 @@
+{
+  "managers": [
+    {
+      "name":"Galax",
+      "account":11970,
+      "profit":25
+    },{
+      "name":"Veronica",
+      "account":7348,
+      "profit":15
+    },{
+      "name":"Dragonfly",
+      "account":10555,
+      "profit":69
+    },{
+      "name":"Condor",
+      "account":10504,
+      "profit":146
+    },{
+      "name":"Shark_007",
+      "account":10469,
+      "profit":1
+    }
+  ]
+}

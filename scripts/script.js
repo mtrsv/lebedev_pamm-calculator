@@ -195,6 +195,60 @@
         this.updatePosition = updatePosition;
     }
 
+    function addIePolyfills(){
+        //CustomEvent
+        //ILIA KANTOR (learn.javascript.ru/dispatch-events)
+        try {
+            new CustomEvent("IE has CustomEvent, but doesn't support constructor");
+        } catch (e) {
+
+            window.CustomEvent = function(event, params) {
+                var evt;
+                params = params || {
+                        bubbles: false,
+                        cancelable: false,
+                        detail: undefined
+                    };
+                evt = document.createEvent("CustomEvent");
+                evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+                return evt;
+            };
+
+            CustomEvent.prototype = Object.create(window.Event.prototype);
+        }
+        
+        //closest
+        //ILIA KANTOR (learn.javascript.ru/task/polyfill-matches)
+        if (!Element.prototype.matches) {
+
+            // определяем свойство
+            Element.prototype.matches = Element.prototype.matchesSelector ||
+                Element.prototype.webkitMatchesSelector ||
+                Element.prototype.mozMatchesSelector ||
+                Element.prototype.msMatchesSelector;
+
+        }
+
+        //closest
+        //ILIA KANTOR (learn.javascript.ru/task/polyfill-closest)
+        if (!Element.prototype.closest) {
+
+            // реализуем
+            Element.prototype.closest = function(css) {
+                var node = this;
+
+                while (node) {
+                    if (node.matches(css)) return node;
+                    else node = node.parentElement;
+                }
+                return null;
+            };
+        }
+
+    }
+
+    addIePolyfills();
+
     var calculatorElement = document.querySelector("#pamm-calculator-first"),
 
         calculator = new PammCalculator({

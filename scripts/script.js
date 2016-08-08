@@ -16,6 +16,7 @@
                 progress: progressElement,
                 bubble: bubbleElement,
                 max: 5000,
+                min: 500,
                 currentPosition: 1000}),
             dayProfitElem = options.dayProfitElem,
             yearProfitElem = options.yearProfitElem;
@@ -67,8 +68,6 @@
             resetActive.apply(this);
             e.target.closest(".names-table__row").classList.add("names-table__row-active");
             setCurrentManager.call(this,e.target.closest(".names-table__row").dataset.managerNumber);
-            // console.dir(e.target.closest(".names-table__row").dataset);
-            // console.dir(this.currentManager);
         }
 
         function resetActive(){
@@ -97,17 +96,19 @@
             progressElem = options.progress || null,
             bubbleElem = options.bubble || null,
             max = options.max || 100,
+            min = options.min || 0,
             currentPosition = options.currentPosition || 0,
-            coef = (sliderElem.offsetWidth - thumbElem.offsetWidth)/max,
+            coef = (sliderElem.offsetWidth - thumbElem.offsetWidth)/(max - min),
             newLeft,
-            isDrag = false;
+            isDrag = false,
+            throttledDispatch = throttle(dispatchEvent,100); //dispatch not often than 100ms
 
         setValue(currentPosition);
-//        dispatchEvent('slide');
 
         sliderElem.addEventListener("mousedown",onMouseDown);
         progressElem.addEventListener("mousedown",onMouseDown);
         thumbElem.addEventListener("mousedown",onMouseDown);
+
         document.addEventListener("mousemove",onMouseMove);
         document.addEventListener("mouseup",onMouseUP);
 
@@ -132,9 +133,11 @@
                 newLeft = rightEdge;
             }
 
+            if (currentPosition == convertCoordinateToValue(newLeft)) return; //if old position == new position => do nothing
+
+            currentPosition =  convertCoordinateToValue(newLeft);
             updatePosition();
-            currentPosition = Math.round(newLeft/coef);
-            dispatchEvent('slide');
+            throttledDispatch('slide');
             //console.log("dispatchEvent('slide');")
         }
 
@@ -170,7 +173,14 @@
                 top: box.top + pageYOffset,
                 left: box.left + pageXOffset
             };
+        }
 
+        function convertCoordinateToValue(coordinate){
+            return Math.round(newLeft/coef) + min;
+        }
+
+        function convertValueToCoordinate(value){
+            return (value - min) * coef;
         }
 
         function dispatchEvent(name){
@@ -182,12 +192,42 @@
             //console.log(name,currentPosition);
         }
 
+        function throttle(func, ms) {
+
+            var isThrottled = false,
+                savedArgs,
+                savedThis;
+
+            function wrapper() {
+
+                if (isThrottled) { // (2)
+                    savedArgs = arguments;
+                    savedThis = this;
+                    return;
+                }
+
+                func.apply(this, arguments); // (1)
+
+                isThrottled = true;
+
+                setTimeout(function() {
+                    isThrottled = false; // (3)
+                    if (savedArgs) {
+                        wrapper.apply(savedThis, savedArgs);
+                        savedArgs = savedThis = null;
+                    }
+                }, ms);
+            }
+
+            return wrapper;
+        }
+
         function setValue(value, isInternal){
             if (value > max) value = max;
             if (value < 0) value = 0;
             currentPosition = value;
 
-            newLeft = value*coef;
+            newLeft = convertValueToCoordinate(value);
             updatePosition();
             dispatchEvent('change');
         }

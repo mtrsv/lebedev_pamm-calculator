@@ -144,15 +144,20 @@ body {
   font-size: 14px;
   display: inline-block;
   padding: 6px 10px 4px;
-  margin: 0 0 3px -10px; }
+  margin: 0 0 3px -10px;
+  cursor: pointer; }
 
-.names-table__row:hover {
+.names-table__row-active {
   border-radius: 4px;
   background-color: #66ccff;
   color: black; }
 
-.names-table__row:hover .names-table__number {
+.names-table__row-active .names-table__number {
   border-color: transparent; }
+
+.names-table__row:hover:not(.names-table__row-active) {
+  border-radius: 4px;
+  background-color: rgba(102, 204, 255, 0.2); }
 
 .names-table__left-column {
   width: 70px;
@@ -196,7 +201,8 @@ body {
   position: absolute;
   top: 100%;
   left: 50%;
-  margin-left: -5px; }
+  margin-left: -5px;
+  transition-duration: .5s; }
 
 .slider__body {
   width: 340px;

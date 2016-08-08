@@ -14,43 +14,43 @@
     <div id="calculator">
 
         <h1 class="page-title">Если бы на прошлой неделе вы инвестировали&nbsp;в&nbsp;ПАММ-счет успешного управляющего</h1>
-        <div class="pamm-calculator">
+        <div id="pamm-calculator-first" class="pamm-calculator">
             <div class="p-calc__names-table">
                     <span class="names-table__head">
                             <span class="names-table__left-column">№ счета</span>
                             <span>Управляющий</span>
                     </span>
-                    <ul>
-                        <li class="names-table__row">
-                            <span class="names-table__left-column">
-                                <span class="names-table__number">11970</span>
-                            </span>
-                            <span>Galax</span>
-                        </li>
-                        <li class="names-table__row">
-                            <span class="names-table__left-column">
-                                <span class="names-table__number">7348</span>
-                            </span>
-                            <span>Veronica</span>
-                        </li>
-                        <li class="names-table__row">
-                            <span class="names-table__left-column">
-                            <span class="names-table__number">10555</span>
-                            </span>
-                            <span>Dragonfly</span>
-                        </li>
-                        <li class="names-table__row">
-                            <span class="names-table__left-column">
-                            <span class="names-table__number">10504</span>
-                            </span>
-                            <span>Condor</span>
-                        </li>
-                        <li class="names-table__row">
-                            <span class="names-table__left-column">
-                                <span class="names-table__number">10469</span>
-                            </span>
-                            <span>Shark_007</span>
-                        </li>
+                    <ul class="names-table__body">
+                        <!--<li class="names-table__row names-table__row-active">-->
+                            <!--<span class="names-table__left-column">-->
+                                <!--<span class="names-table__number">11970</span>-->
+                            <!--</span>-->
+                            <!--<span>Galax</span>-->
+                        <!--</li>-->
+                        <!--<li class="names-table__row">-->
+                            <!--<span class="names-table__left-column">-->
+                                <!--<span class="names-table__number">7348</span>-->
+                            <!--</span>-->
+                            <!--<span>Veronica</span>-->
+                        <!--</li>-->
+                        <!--<li class="names-table__row">-->
+                            <!--<span class="names-table__left-column">-->
+                                <!--<span class="names-table__number">10555</span>-->
+                            <!--</span>-->
+                            <!--<span>Dragonfly</span>-->
+                        <!--</li>-->
+                        <!--<li class="names-table__row">-->
+                            <!--<span class="names-table__left-column">-->
+                                <!--<span class="names-table__number">10504</span>-->
+                            <!--</span>-->
+                            <!--<span>Condor</span>-->
+                        <!--</li>-->
+                        <!--<li class="names-table__row">-->
+                            <!--<span class="names-table__left-column">-->
+                                <!--<span class="names-table__number">10469</span>-->
+                            <!--</span>-->
+                            <!--<span>Shark_007</span>-->
+                        <!--</li>-->
                     </ul>
                 </table>
             </div>
@@ -67,11 +67,11 @@
                     <div>
 
                         <div class="deposit-result__text">Сегодня ваш депозит бы составил</div>
-                        <div class="deposit-result__value">1 265 $</div>
+                        <div id="day-profit" class="deposit-result__value">1 265 $</div>
                     </div>
                     <div>
                         <div class="deposit-result__text">За год при повторении вклада, заработали бы</div>
-                        <div class="deposit-result__value">27 432 $</div>
+                        <div id="year-profit" class="deposit-result__value">27 432 $</div>
 
                     </div>
 
@@ -81,6 +81,29 @@
             </div>
         </div>
     </div>
-    <scrip url="script.js"></scrip>
+    <!--<script type="text/template" id="template&#45;&#45;managers-list">-->
+        <!--<ul>-->
+            <!--<% managers.forEach(function(manager) { %>-->
+            <!--<li class="names-table__row">-->
+                <!--<span class="names-table__left-column">-->
+                    <!--<span class="names-table__number"><%-manager:name%></span>-->
+                <!--</span>-->
+                <!--<span><%-manager:account%></span>-->
+            <!--</li>-->
+            <!--<% }); %>-->
+        <!--</ul>-->
+    <!--</script>-->
+    <script type="text/template" id="template--managers-list">
+            <li class="names-table__row" data-profit="<%- profit %>" data-manager-number="<%- number %>">
+                <span class="names-table__left-column">
+                    <span class="names-table__number"><%- account %></span>
+                </span>
+                <span><%- name %></span>
+            </li>
+    </script>
+
+    <script type="text/javascript" src="scripts/ajax-utils.js"></script>
+    <script type="text/javascript" src="scripts/lodash.js"></script>
+    <script type="text/javascript" src="scripts/script.js"></script>
 </body>
 </html>

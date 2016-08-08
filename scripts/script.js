@@ -22,18 +22,43 @@
             yearProfitElem = options.yearProfitElem;
 
         requestData();
+        showLoaderAnimation();
         //slider.setValue(slider.value);
 
         sliderElement.addEventListener("slide",updateProfit.bind(this));
 
-        function requestData(){
-            $ajaxUtils.sendGetRequest("/data.json",addManagers.bind(this));
+        function showLoaderAnimation(){
+            var loadingDiv = document.createElement('div');
+            loadingDiv.className = "pamm-calculator-loading";
+            loadingDiv.style.height = elem.offsetHeight + "px";
+            loadingDiv.style.width = elem.offsetWidth + "px";
+            loadingDiv.style.lineHeight = elem.offsetHeight + "px";
+            loadingDiv.innerHTML = "<img src='../images/loading.gif'>";
+            
+            elem.parentNode.insertBefore(loadingDiv, elem);
+            elem.parentNode.querySelector(".pamm-calculator-loading").style.opacity = 1;
         }
+
+        function hideLoaderAnimation(){
+            elem.parentNode.querySelector(".pamm-calculator-loading").style.opacity = 0;
+            elem.parentNode.querySelector(".pamm-calculator-loading").style.display = "none";
+        }
+
+        function showContainer(){
+            elem.querySelector(".p-calc__container--not-loaded").classList.remove("p-calc__container--not-loaded");
+        }
+
+        function requestData(){
+            $ajaxUtils.sendGetRequest("/data.json",onDataLoaded.bind(this));
+        }
+        
                 
-        function addManagers(responseObject){
+        function onDataLoaded(responseObject){
             calculator.managers = responseObject.managers;
             createManagersList.call(calculator);
             setCurrentManager.call(calculator, 0);
+            hideLoaderAnimation();
+            showContainer();
         }
 
         function setCurrentManager(index){

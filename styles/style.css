@@ -96,9 +96,10 @@ body {
   border-radius: 10px;
   padding: 26px 34px 10px 26px;
   box-sizing: border-box;
-  position: relative; }
+  position: relative;
+  transition-duration: .5s; }
 
-.pamm-calculator:before {
+.pamm-calculator::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -114,21 +115,36 @@ body {
   border-radius: 25%;
   clip: rect(170px, 600px, 350px, 10px); }
 
+.p-calc__container {
+  -webkit-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  -moz-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  -ms-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  -o-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  opacity: 1;
+  position: relative; }
+
+.p-calc__container--not-loaded {
+  opacity: 0; }
+
+.pamm-calculator-loading {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #0185e8;
+  position: absolute;
+  z-index: 99;
+  text-align: center;
+  -webkit-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  -moz-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  -ms-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  -o-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  opacity: 0; }
+
 .p-calc__names-table {
   width: 185px;
   float: left; }
-
-.p-calc__names-table::after {
-  content: '';
-  background-image: url("../images/arrow.png");
-  background-repeat: no-repeat;
-  background-position: 0px -14px;
-  margin-left: 150px;
-  position: relative;
-  top: -180px;
-  width: 60px;
-  height: 300px;
-  display: inline-block; }
 
 .p-calc__slider-box {
   margin-left: 203px; }
@@ -138,6 +154,20 @@ body {
   font-style: italic;
   color: rgba(255, 255, 255, 0.5);
   margin-bottom: 10px;
+  display: inline-block;
+  position: relative; }
+
+.names-table__head::after {
+  content: '';
+  background-image: url("../images/arrow.png");
+  background-repeat: no-repeat;
+  background-position: 0px -14px;
+  margin-left: 150px;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 60px;
+  height: 300px;
   display: inline-block; }
 
 .names-table__row {

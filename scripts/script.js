@@ -83,10 +83,11 @@
             calculator.startDeposit = slider.value;
             // console.log("updateProfit");
             var profit = Math.floor(calculator.startDeposit * calculator.currentProfit/100);
-            if (dayProfitElem) dayProfitElem.innerText = profit + calculator.startDeposit + " $";
-            if (yearProfitElem) yearProfitElem.innerText =  profit * 4 * 12 + calculator.startDeposit + " $";
-            if (bubbleElement) bubbleElement.innerText = calculator.startDeposit + " $";
+            if (dayProfitElem) dayProfitElem.textContent = profit + calculator.startDeposit + " $";
+            if (yearProfitElem) yearProfitElem.textContent =  profit * 4 * 12 + calculator.startDeposit + " $";
+            if (bubbleElement) bubbleElement.textContent = calculator.startDeposit + " $";
             slider.updatePosition();
+
         }
     }
 

@@ -33,7 +33,7 @@
             loadingDiv.style.height = elem.offsetHeight + "px";
             loadingDiv.style.width = elem.offsetWidth + "px";
             loadingDiv.style.lineHeight = elem.offsetHeight + "px";
-            loadingDiv.innerHTML = "<img src='./../images/loading.gif'>";
+            loadingDiv.innerHTML = "<img src='images/loading.gif'>";
 
             elem.parentNode.insertBefore(loadingDiv, elem);
             elem.parentNode.querySelector(".pamm-calculator-loading").style.opacity = 1;

@@ -4,9 +4,7 @@
 // 2016
 
 $font-size--pamm-calculator: 14px;
-$color--pamm-calculator: rgb(255, 255, 255);
 $font-type: 'Open Sans', 'Tahoma', sans-serif;
-
 $width--pamm-calculator: 610px;
 
 @mixin m-gradient-background(){
@@ -103,7 +101,7 @@ body{
 
 .pamm-calculator{
   width: $width--pamm-calculator;
-  color: $color--pamm-calculator;
+  color: rgb(255, 255, 255);
   margin: auto;
   border: 1px solid rgb(1, 133, 232);
   background-color: rgba(0, 32, 62, .45);

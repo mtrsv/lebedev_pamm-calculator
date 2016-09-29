@@ -8,7 +8,9 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="styles/style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&subset=cyrillic,cyrillic-ext" rel="stylesheet">
-
+    <script type="text/javascript" src="scripts/ajax-utils.js" defer></script>
+    <script type="text/javascript" src="scripts/lodash.js" defer></script>
+    <script type="text/javascript" src="scripts/script.js" defer></script>
 </head>
 <body>
     <div id="calculator">
@@ -49,22 +51,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
 
-        </div>
-    <!--<script type="text/template" id="template&#45;&#45;managers-list">-->
-        <!--<ul>-->
-            <!--<% managers.forEach(function(manager) { %>-->
-            <!--<li class="names-table__row">-->
-                <!--<span class="names-table__left-column">-->
-                    <!--<span class="names-table__number"><%-manager:name%></span>-->
-                <!--</span>-->
-                <!--<span><%-manager:account%></span>-->
-            <!--</li>-->
-            <!--<% }); %>-->
-        <!--</ul>-->
-    <!--</script>-->
     <script type="text/template" id="template--managers-list">
             <li class="names-table__row" data-profit="<%- profit %>" data-manager-number="<%- number %>">
                 <span class="names-table__left-column">
@@ -73,9 +62,5 @@
                 <span><%- name %></span>
             </li>
     </script>
-
-    <script type="text/javascript" src="scripts/ajax-utils.js"></script>
-    <script type="text/javascript" src="scripts/lodash.js"></script>
-    <script type="text/javascript" src="scripts/script.js"></script>
 </body>
 </html>

@@ -66,10 +66,6 @@ function handleResponse(request,
     }
   }
 }
-
-
-
-
 // Expose utility to the global object
 global.$ajaxUtils = ajaxUtils;
 

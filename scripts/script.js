@@ -2,6 +2,25 @@
 // 2016
 
 (function(global){
+    document.addEventListener("DOMContentLoaded", onDomLoad);
+
+    var calculatorElement,
+      calculator;
+
+    function onDomLoad(){
+        addIePolyfills();
+        calculatorElement = document.querySelector("#pamm-calculator-first");
+
+        calculator = new PammCalculator({
+            calculatorElement: calculatorElement,
+            sliderElement: calculatorElement.querySelector(".slider__body"),
+            thumbElement: calculatorElement.querySelector(".slider__thumb"),
+            progressElement: calculatorElement.querySelector(".slider__progress"),
+            bubbleElement: calculatorElement.querySelector(".slider__bubble"),
+            dayProfitElem: calculatorElement.querySelector("#day-profit"),
+            yearProfitElem: calculatorElement.querySelector("#year-profit")
+        });
+    }
 
     function PammCalculator(options){
         var calculator = this,
@@ -334,20 +353,5 @@
         }
 
     }
-
-    addIePolyfills();
-
-    var calculatorElement = document.querySelector("#pamm-calculator-first"),
-
-    calculator = new PammCalculator({
-        calculatorElement: calculatorElement,
-        sliderElement: calculatorElement.querySelector(".slider__body"),
-        thumbElement: calculatorElement.querySelector(".slider__thumb"),
-        progressElement: calculatorElement.querySelector(".slider__progress"),
-        bubbleElement: calculatorElement.querySelector(".slider__bubble"),
-        dayProfitElem: calculatorElement.querySelector("#day-profit"),
-        yearProfitElem: calculatorElement.querySelector("#year-profit")
-    });
-
 
 })(window);
